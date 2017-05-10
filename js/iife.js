@@ -1,3 +1,5 @@
+"use strict";
+
 console.log("i am here");
 
 //let getLocation = document.getElementById("btn-checkObject"); //let can only be instantiated once
@@ -35,11 +37,11 @@ addPlayer.addEventListener("click", function(){
 		}
 	}
 	console.log("whichselected", whichselected);
-	if (whichselected == 0){
+	if (whichselected === 0){
 		starWars.addJedi(newPlayerName);
-	} else if(whichselected == 1){
+	} else if(whichselected === 1){
 		starWars.setPlayer(newPlayerName);
-	}else if(whichselected == 2){
+	}else if(whichselected === 2){
 		starWars.setEvil(newPlayerName);
 	}
 });

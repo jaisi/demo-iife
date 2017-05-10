@@ -1,54 +1,69 @@
-console.log("light");
+"use strict";
+console.log("hello light side");
 
-var lightSide = (function(originalStarwars){
-	var location = "D'Qar";
-	var keyPlayers = ["princess leia", "hans solo", "chewbacca", "admiral ackbar", "jar jar bin"];
-	var jedi = ["luke skywalker", "yoda", "obi-wan kenobi","anakin skywalker", "mace windu"];
+let darkside = require("./dark.js");
+
+
+var location = "D'Qar";
+var keyplayers = ["Princess Leia Organa", "Han Solo", "Chewbacca", "Admiral Ackbar", "Captain Verrack", "Jar Jar Binks", "Lando Calrissian", "Poe Dameron"];
+var jedi = ["Luke Skywalker", "Yoda", "Obi-Wan Kenobi", "Anakin Skywalker", "Mace Windu"];
+
+
+let addJedi = function(who){
+	jedi.push(who);
+};
+
+let getJedi = function(){
+	return jedi;
+};
+
+let getPlayer = function(){
+	console.log("getPlayer light", keyplayers);
+	return keyplayers;
+};
+
+let setPlayer = function(who){
+	keyplayers.push(who);
+};
+
+let removeJedi = function(who, name){
+	//jedi will either die or go to dark side
+	//when go to dark side, gets new name
 	
-	originalStarwars.getLocation = function(whoAsks){
-		console.log("whoAsks", whoAsks);
-		let tell = true;
-		let evilPlayes = starWars.getEvil();
-		evilPlayes.forEach(function(item){
-			if(item === whoAsks)
-				tell = false;
-		});
-
-		if (tell){
-			console.log(whoAsks, "is on the good side. Location: ", location);
-		} else {
-			console.log("you are evil, cannot tell you");
+	var whichIndex;
+	jedi.forEach(function(item, index) {
+		if (item === who){
+			whichIndex = index;
 		}
+	});
+	jedi.splice(whichIndex, 1); 
+	console.log("jedi after death", jedi);
+	//if dead, no new name
+	if (name){
+		//going to dark side results in new name
+		darkside.setEvil(name);
+	}
+};
 
-	};
-
-	originalStarwars.addJedi = function(who){
-		jedi.push(who);
-		console.log("jedi list: ", jedi);
-
-	};
-
-	originalStarwars.setPlayer = function(who){
-		keyPlayers.push(who);
-		console.log("players list", keyPlayers);
-	};
-
-	originalStarwars.removeJedi=function(who, name){
-		var whichIndex;
-		jedi.forEach(function(item, index){
-			if(item === who){
-				whichIndex = index;
-			}
-		});
-
-		jedi.splice(whichIndex,1);
-		console.log("jedi after death", jedi);
-
-		if(name){
-			starWars.setEvil(name);
+let getLocation = function(whoAsks){
+	console.log("whoAsks", whoAsks);
+	var tell = true;
+	let evilPlayers = darkside.getEvil();
+	evilPlayers.forEach(function(item) {
+		if (item === whoAsks){
+			tell = false;
 		}
-	};
+	});
+	
+	if (tell){
+		console.log("location", location);
+		return location;
+	}else {
+		var message = "You're evil, can't tell you";
+		console.log("message", message);
+		return message;
+	}
+};
 
-	return originalStarwars;
+module.exports = {addJedi, getJedi, getPlayer, setPlayer, removeJedi, getLocation};
 
-})(starWars);

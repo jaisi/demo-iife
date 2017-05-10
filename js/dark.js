@@ -1,18 +1,25 @@
-console.log("dark");
+"use strict";
 
-var starWars = (function(){
-	var location = "the unknown regions";
-	var keyPlayers = ["count dooku", "darth maul", "general grievous", "greedo", "jango fett", "darth sidous"];
-	return {
-		getEvil: function(){
-			console.log("evil list of player", keyPlayers);
-			return keyPlayers;
-		},
-		setEvil: function(who){
-			keyPlayers.push(who);
-			console.log("evil players", keyPlayers);
-		}
-	}
+console.log("hello dark side");
 
-})();
-//() invokes the function right now
+
+var location = "The Unknown Regions";
+var keyplayers = ["Count Dooku", "Darth Maul","General Grievous", "Greedo", "Jango Fett", "Darth Sidious"];
+
+
+let getEvil = function(){
+	console.log("Evil list of players", keyplayers);
+	return keyplayers;
+};
+
+let setEvil = function(who){
+	keyplayers.push(who);
+	console.log("keyplayers", keyplayers);
+};
+
+module.exports = {getEvil, setEvil};
+
+
+
+
+// turned to dark side: Kylo Ren from Ben Solo and Darth Vader from Anakin Skywalker
